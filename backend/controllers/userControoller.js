@@ -4,7 +4,7 @@ export const addUser = async (req,res)=>{
         try{
                 const data = req.body;
                 const user = new User(data);
-                user.save();
+                await user.save();
                 console.log(data);
                 res.status(200).json(data);
         }catch(err){
@@ -19,7 +19,7 @@ export const getUserById = async (req,res) =>{
                 const data = await User.findById(id);
                 console.log(data);
                 res.status(200).json(data);
-        } catch (error) {
+        } catch (err) {
                 res.status(500)
                 .json({message : "Error while fetching user",error : err.message});
         }

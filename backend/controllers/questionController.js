@@ -15,7 +15,7 @@ export const addQuestion = async (req, res) => {
         try {
                 const data = await req.body;
                 const quiz = new Question(data)
-                Question.save();
+                await quiz.save();
                 console.log(data);
                 res.status(200).json(data);
 

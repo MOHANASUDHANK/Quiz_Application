@@ -7,7 +7,7 @@ const questionSchema = new mongoose.Schema({
         },
         text: String,
         option: [String],
-        correctOption: Number,
+        correctAnswer: String,
         point: Number,
 },
         { timestamps: true }

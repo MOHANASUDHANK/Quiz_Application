@@ -16,7 +16,7 @@ export const getAllQuiz = async (req, res) => {
 export const getQuizById = async (req, res) => {
         try {
                 const { id } = req.params;
-                const data = await quiz.findById(id);
+                const data = await Quiz.findById(id);
                 console.log(data);
                 res.status(200).json(data);
         } catch (err) {
@@ -28,7 +28,7 @@ export const addQuiz = async (req, res) => {
         try {
                 const data = await req.body;
                 const quiz = new Quiz(data)
-                quiz.save();
+                await quiz.save();
                 console.log(data);
                 res.status(200).json(data);
 
