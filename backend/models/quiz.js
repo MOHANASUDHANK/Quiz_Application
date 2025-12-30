@@ -10,7 +10,7 @@ const quizSchema = mongoose.Schema({
         timeLimit: Number,
         createdBy: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: User
+                ref: "User"
         },
 }
         , { timestamps: true }

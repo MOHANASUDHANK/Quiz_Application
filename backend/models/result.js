@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const resultSchema = mongoose.Schema({
         userId: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: User
+                ref: "User"
         },
         quizId: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: Quiz
+                ref: "Quiz"
         },
         score: Number,
         totalPoints: Number,
@@ -17,7 +17,7 @@ const resultSchema = mongoose.Schema({
         }
 },
         {
-                timestamp: true
+                timestamps: true
         });
 
 export default mongoose.model("Result",resultSchema);

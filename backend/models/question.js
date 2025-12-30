@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const questionSchema = new mongoose.Schema({
         quizId: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: Quiz
+                ref: "Quiz"
         },
         text: String,
         option: [String],
