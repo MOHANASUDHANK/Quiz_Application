@@ -16,7 +16,6 @@ export default function QuizAttempt() {
 
     async function  submitQuiz(){
         const result = await api.post(`/result/${id}/attempt`,{
-            userId : "694b716a9966acfe18a07beb",
             answer : answers
         })
         console.log(result.data);

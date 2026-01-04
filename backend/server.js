@@ -17,7 +17,7 @@ app.use("/quiz",quizRouter);
 app.use("/user",userRouter);
 app.use("/question",questionRouter);
 app.use("/result",resultRouter);
-app.use("/",authRouter)
+app.use("/auth",authRouter)
 
 mongoose.connect("mongodb://localhost:27017/quiz_app")
         .then(() => console.log("db connected"))
