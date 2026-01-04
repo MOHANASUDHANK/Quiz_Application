@@ -26,9 +26,9 @@ export const getQuizById = async (req, res) => {
 
 export const addQuiz = async (req, res) => {
         try {
-                const data = await req.body;
-                const quiz = new Quiz(data)
-                await quiz.save();
+                const a = await req.body;
+                const quiz = new Quiz(a)
+                const data = await quiz.save();
                 console.log(data);
                 res.status(200).json(data);
 

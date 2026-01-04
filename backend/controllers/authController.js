@@ -12,7 +12,7 @@ export const register = async(req , res, next)=>{
                 userName,
                 password:hashedPassword,
                 email,
-                role : "user"
+                role : "admin"
         });
 
         await user.save();
@@ -39,7 +39,6 @@ export const login = async(req, res) =>{
 
                 if(!user){
                         return res.status(400).json({message : "user not found"});
-                                        console.log("entered");
 
                 }
 
@@ -48,13 +47,14 @@ export const login = async(req, res) =>{
 
                 if(!match){
                         return res.status(400).json({message : "invalid username"});
-                                        console.log("entered");
 
                 }
                 console.log("entered");
 
                 const token = jwt.sign(
-                        {id : user._id},
+                        {id : user._id,
+                        role : "admin"
+                        },
                         process.env.JWT_SECRET,
                         {expiresIn:"1d"}
                 )

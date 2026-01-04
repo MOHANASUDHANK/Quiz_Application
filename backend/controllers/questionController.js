@@ -1,5 +1,6 @@
 import Question from "../models/question.js"
 
+
 export const getQuestionByQuizId = async (req,res) => {
         try{
         const {id} = req.params;
@@ -13,9 +14,12 @@ export const getQuestionByQuizId = async (req,res) => {
 
 export const addQuestion = async (req, res) => {
         try {
-                const data = await req.body;
-                const quiz = new Question(data)
-                await quiz.save();
+                const {quizId,questions} = req.body;
+                console.log(req);
+                const data = questions.map(q=>({
+                        ...q,quizId
+                }))
+                await Question.insertMany(data)
                 console.log(data);
                 res.status(200).json(data);
 

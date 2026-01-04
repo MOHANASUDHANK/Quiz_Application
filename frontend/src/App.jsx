@@ -7,6 +7,8 @@ import Result from './pages/Result'
 import Login from "./pages/Login"
 import ProductedRoute from "./auth/ProductedRoute"
 import Register from "./pages/Register"
+import CreateQuiz from './pages/CreateQuiz'
+import AddQuestions from './pages/AddQuestions'
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
           <Route path = "/quiz/:id" element = {<QuizAttempt/>}/>
           <Route path="/result/:id" element = {<Result/>}/>
           <Route path="/" element={<QuizList />} />
+          <Route path='/create' element={<CreateQuiz/>}/>
+          <Route path='/create/:id' element={<AddQuestions/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

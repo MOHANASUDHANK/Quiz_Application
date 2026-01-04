@@ -13,6 +13,7 @@ export const protect = async (req,res,next) => {
         try {
                 const decoded = jwt.verify(token,process.env.JWT_SECRET)
                 req.userId = decoded.id;
+                req.role = decoded.role;
                 next();
         } catch (err) {
                 console.log(authHeader)
@@ -23,7 +24,7 @@ export const protect = async (req,res,next) => {
 
 export const authorize = (...roles) => {
         return (req,res,next) => {
-                if(!roles.includes(req.body.role)){
+                if(!roles.includes(req.role)){
                         return res.status(403).json({message : "Access denied"})
                 }
                 next();

@@ -4,6 +4,6 @@ import { addQuestion, getQuestionByQuizId } from "../controllers/questionControl
 const router = express.Router();
 
 router.get("/:id",getQuestionByQuizId);
-router.post("/",addQuestion);
+router.post("/add",addQuestion);
 
 export default router;
