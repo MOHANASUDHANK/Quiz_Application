@@ -12,6 +12,7 @@ export default function QuizAttempt() {
         console.log(id);
         api.get(`/question/${id}`).then((r) => {setQuestions(r.data)
       setAnswers(new Array(r.data.length).fill(null));});
+
     }, [id]);
 
     async function  submitQuiz(){
