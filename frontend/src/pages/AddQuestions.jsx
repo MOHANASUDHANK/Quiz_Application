@@ -22,7 +22,7 @@ export default function AddQuestions() {
   function addQuestionToList() {
     if (!question.text.trim()) return;
 
-    setQuestions([...questions, question]);
+    setQuestions([...questions, {...question}]);
 
 
     setQuestion({

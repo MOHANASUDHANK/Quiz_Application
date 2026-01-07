@@ -54,9 +54,9 @@ export const attemptQuiz = async (req, res) => {
     const {answer } = req.body;
     const userId =  req.userId;
          
-    if(await Result.findOne({userId,quizId : id})){
-    return res.status(400).json({ message: "Quiz already attempted" });
-    }
+//     if(await Result.findOne({userId,quizId : id})){
+//     return res.status(400).json({ message: "Quiz already attempted" });
+//     }
 
     const questions = await Question.find({ quizId: id });
 

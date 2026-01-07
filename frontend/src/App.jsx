@@ -5,7 +5,7 @@ import QuizList from './pages/QuizList'
 import QuizAttempt from './pages/QuizAttempt'
 import Result from './pages/Result'
 import Login from "./pages/Login"
-import ProductedRoute from "./auth/ProductedRoute"
+import ProtectedRoute from "./auth/ProtectedRoute"
 import Register from "./pages/Register"
 import CreateQuiz from './pages/CreateQuiz'
 import AddQuestions from './pages/AddQuestions'
@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/login" element = {<Login/>}/>
         <Route path = "/register" element = {<Register/>}/>
-        <Route element = {<ProductedRoute/>}>
+        <Route element = {<ProtectedRoute/>}>
           <Route path = "/quiz/:id" element = {<QuizAttempt/>}/>
           <Route path="/result/:id" element = {<Result/>}/>
           <Route path="/" element={<QuizList />} />

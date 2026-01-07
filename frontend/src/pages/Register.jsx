@@ -22,7 +22,7 @@ export default function Register(){
                 
                 const res = await api.post(`/auth/register`,form);
                 console.log(res);
-                Navigate(`/`)
+                Navigate(`/login`)
                 } catch (err) {
                         console.log(err)
                 }

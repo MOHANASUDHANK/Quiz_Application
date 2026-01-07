@@ -7,7 +7,7 @@ export default function CreateQuiz() {
         title: "",
         description: "",
         categories: [],
-        difficulty: "",
+        difficulty: "easy",
         timeLimit: 100,
     });
     const [category, setCategory] = useState("");
@@ -50,6 +50,7 @@ export default function CreateQuiz() {
 
     return (
         <div>
+            <h2>Create New Quiz</h2>
             <form>
                 <input
                     placeholder="Title"
