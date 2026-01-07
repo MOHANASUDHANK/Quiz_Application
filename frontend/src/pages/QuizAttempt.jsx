@@ -10,22 +10,23 @@ export default function QuizAttempt() {
 
     useEffect(() => {
         console.log(id);
-        api.get(`/question/${id}`).then((r) => {setQuestions(r.data)
-      setAnswers(new Array(r.data.length).fill(null));});
-
+        api.get(`/question/${id}`).then((r) => {
+            setQuestions(r.data);
+            setAnswers(new Array(r.data.length).fill(null));
+        });
     }, [id]);
 
-    async function  submitQuiz(){
-        const result = await api.post(`/result/${id}/attempt`,{
-            answer : answers
-        })
+    async function submitQuiz() {
+        const result = await api.post(`/result/${id}/attempt`, {
+            answer: answers,
+        });
         console.log(result.data);
         navigate(`/result/${result.data._id}`);
     }
 
-    function handleChange( i, j){
+    function handleChange(i, j) {
         const copy = [...answers];
-        copy[i]=j;
+        copy[i] = j;
         setAnswers(copy);
         console.log(copy);
     }
@@ -48,7 +49,7 @@ export default function QuizAttempt() {
                     ))}
                 </div>
             ))}
-             <button onClick={submitQuiz}>Submit</button>
+            <button onClick={submitQuiz}>Submit</button>
         </div>
     );
 }

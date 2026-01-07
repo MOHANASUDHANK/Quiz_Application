@@ -5,7 +5,7 @@ import api from "../api/api";
 export default function Result() {
   const { id } = useParams();
   const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     async function fetchResult() {

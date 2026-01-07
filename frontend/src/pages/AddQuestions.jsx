@@ -27,7 +27,7 @@ export default function AddQuestions() {
 
     setQuestion({
       text: "",
-      options: ["", "", "", ""],
+      option: ["", "", "", ""],
       correctAnswer: "",
       point: 1
     });
