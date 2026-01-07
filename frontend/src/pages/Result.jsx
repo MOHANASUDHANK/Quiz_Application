@@ -5,13 +5,14 @@ import api from "../api/api";
 export default function Result() {
   const { id } = useParams();
   const [result, setResult] = useState(null);
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchResult() {
       try {
         const res = await api.get(`/result/${id}`);
         setResult(res.data);
+        console.log(res.data);
       } catch (err) {
         console.error("Error fetching result", err);
       } finally {
@@ -23,11 +24,11 @@ export default function Result() {
   }, [id]);
 
   if (loading) {
-    return <div>Loading result...</div>;
+    return <p>Loading result...</p>;
   }
 
   if (!result) {
-    return <div>No result found</div>;
+    return <p>No result found.</p>;
   }
 
   return (

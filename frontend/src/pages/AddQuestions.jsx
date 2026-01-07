@@ -6,7 +6,7 @@ export default function AddQuestions() {
   const { id } = useParams();
   const [question, setQuestion] = useState({
     text: "",
-    options: ["", "", "", ""],
+    option: ["", "", "", ""],
     correctAnswer: "",
     point: 1
   });
@@ -14,9 +14,9 @@ export default function AddQuestions() {
   const navigate = useNavigate();
 
   function updateOption(index, value) {
-    const copy = [...question.options];
+    const copy = [...question.option];
     copy[index] = value;
-    setQuestion({ ...question, options: copy });
+    setQuestion({ ...question, option: copy });
   }
 
   function addQuestionToList() {
@@ -59,7 +59,7 @@ export default function AddQuestions() {
         }
       />
 
-      {question.options.map((opt, i) => (
+      {question.option.map((opt, i) => (
         <input
           key={i}
           placeholder={`Option ${i + 1}`}
@@ -120,7 +120,7 @@ export default function AddQuestions() {
 
           <p><b>Q:</b> {q.text}</p>
           <ul>
-            {q.options.map((o, j) => (
+            {q.option.map((o, j) => (
               <li key={j}>{o}</li>
             ))}
           </ul>

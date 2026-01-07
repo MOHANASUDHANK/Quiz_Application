@@ -10,7 +10,10 @@ import dotenv from "dotenv"
 
 const app = express()
 app.use(express.json())
-app.use(cors());
+app.use(cors({
+        origin : "*",
+        credentials : true
+}));
 dotenv.config();
 
 app.use("/quiz",quizRouter);
@@ -19,7 +22,7 @@ app.use("/question",questionRouter);
 app.use("/result",resultRouter);
 app.use("/auth",authRouter)
 
-mongoose.connect("mongodb://localhost:27017/quiz_app")
+mongoose.connect(process.env.MONGO_DB)
         .then(() => console.log("db connected"))
 
 export default app;
