@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import {useNavigate} from "react-router-dom"
 import api from "../api/api"
+import Navbar from "../components/NavBar";
 
 export default function QuizList(){
 
@@ -22,6 +23,7 @@ const isAdmin = payload!==null && payload.role !=null && payload.role == "admin"
 console.log(isAdmin);
 
         return (<div>
+                <Navbar/>
            <h2>Quiz</h2>
            <div>
            {

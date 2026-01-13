@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz App – All Quizzes</title>
+
+  <style>
+    /* ---------- Base ---------- */
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f5f6fa;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      padding: 8px 14px;
+      cursor: pointer;
+      border: none;
+      background-color: #4f46e5;
+      color: white;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #4338ca;
+    }
+
+    /* ---------- Navbar ---------- */
+    nav {
+      background-color: #111827;
+      color: white;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-left {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .nav-right a {
+      margin-left: 16px;
+      font-size: 14px;
+    }
+
+    .nav-right a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- Page Layout ---------- */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .page-header {
+      margin-bottom: 20px;
+    }
+
+    .page-header h1 {
+      margin-bottom: 5px;
+    }
+
+    .page-header p {
+      color: #666;
+    }
+
+    /* ---------- Quiz Card ---------- */
+    .quiz-card {
+      background-color: white;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .quiz-card h2 {
+      margin: 0 0 8px;
+    }
+
+    .quiz-meta {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .quiz-meta span {
+      display: inline-block;
+      margin-right: 12px;
+    }
+
+    /* ---------- Empty State ---------- */
+    .empty {
+      text-align: center;
+      color: #777;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-left">
+      Quiz App
+    </div>
+
+    <div class="nav-right">
+      <a href="#">Quizzes</a>
+      <a href="#">Results</a>
+      <a href="#">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Available Quizzes</h1>
+      <p>Select a quiz to start attempting</p>
+    </div>
+
+    <!-- Quiz Card -->
+    <div class="quiz-card">
+      <h2>JavaScript Basics</h2>
+      <p>Test your fundamentals of JavaScript</p>
+
+      <div class="quiz-meta">
+        <span><strong>Category:</strong> Programming</span>
+        <span><strong>Difficulty:</strong> Easy</span>
+        <span><strong>Questions:</strong> 10</span>
+        <span><strong>Time:</strong> 15 min</span>
+      </div>
+
+      <button>Start Quiz</button>
+    </div>
+
+    <!-- Quiz Card -->
+    <div class="quiz-card">
+      <h2>MongoDB Advanced</h2>
+      <p>Deep dive into MongoDB concepts</p>
+
+      <div class="quiz-meta">
+        <span><strong>Category:</strong> Database</span>
+        <span><strong>Difficulty:</strong> Hard</span>
+        <span><strong>Questions:</strong> 20</span>
+        <span><strong>Time:</strong> 30 min</span>
+      </div>
+
+      <button>Start Quiz</button>
+    </div>
+
+    <!-- Empty State Example -->
+    <!--
+    <div class="empty">
+      <p>No quizzes available right now.</p>
+    </div>
+    -->
+
+  </div>
+
+</body>
+</html>
