@@ -1,6 +1,8 @@
 import { useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
 import api from "../api/api";
+import Navbar from "../components/Navbar";
+import "../styles/admin.css";
 
 export default function AddQuestions() {
   const { id } = useParams();
@@ -48,88 +50,111 @@ export default function AddQuestions() {
   }
 
   return (
-    <div>
-      <h2>Add Questions</h2>
+    <div className="admin-page-container">
+      <Navbar />
+      <div className="admin-content-wrapper">
+        <div className="admin-card text-left">
+          <h1 className="admin-title text-center">Add Questions</h1>
+          <p className="admin-subtitle text-center">Add questions to your newly created quiz.</p>
 
-      <input
-        placeholder="Question text"
-        value={question.text}
-        onChange={(e) =>
-          setQuestion({ ...question, text: e.target.value })
-        }
-      />
+          <div className="form-container">
+            <div className="form-group">
+              <label className="form-label">Question Text</label>
+              <input
+                placeholder="What is React?"
+                value={question.text}
+                onChange={(e) =>
+                  setQuestion({ ...question, text: e.target.value })
+                }
+                className="form-input"
+              />
+            </div>
 
-      {question.option.map((opt, i) => (
-        <input
-          key={i}
-          placeholder={`Option ${i + 1}`}
-          value={opt}
-          onChange={(e) => updateOption(i, e.target.value)}
-        />
-      ))}
+            <div className="form-group">
+              <label className="form-label">Options</label>
+              <div className="question-options-container">
+                {question.option.map((opt, i) => (
+                  <input
+                    key={i}
+                    placeholder={`Option ${i + 1}`}
+                    value={opt}
+                    onChange={(e) => updateOption(i, e.target.value)}
+                    className="form-input"
+                  />
+                ))}
+              </div>
+            </div>
 
-      <input
-        placeholder="Correct answer"
-        value={question.correctAnswer}
-        onChange={(e) =>
-          setQuestion({ ...question, correctAnswer: e.target.value })
-        }
-      />
+            <div className="radio-group">
+              <div className="flex-1">
+                <label className="form-label">Correct Answer</label>
+                <input
+                  placeholder="Exact text of correct option"
+                  value={question.correctAnswer}
+                  onChange={(e) =>
+                    setQuestion({ ...question, correctAnswer: e.target.value })
+                  }
+                  className="form-input"
+                />
+              </div>
 
-      <input
-        type="number"
-        placeholder="Points"
-        value={question.point}
-        onChange={(e) =>
-          setQuestion({ ...question, point: Number(e.target.value) })
-        }
-      />
+              <div className="width-150">
+                <label className="form-label">Points</label>
+                <input
+                  type="number"
+                  placeholder="Points"
+                  value={question.point}
+                  onChange={(e) =>
+                    setQuestion({ ...question, point: Number(e.target.value) })
+                  }
+                  className="form-input"
+                />
+              </div>
+            </div>
 
-      <button onClick={addQuestionToList}>
-        Add Question
-      </button>
+            <button onClick={addQuestionToList} className="admin-btn-secondary">
+              ➕ Add to List
+            </button>
+          </div>
 
-      <hr />
+          {questions.length > 0 && (
+            <div className="mt-40 questions-added-section">
+              <div className="quiz-list-header">
+                <h3>Questions Added ({questions.length})</h3>
+                <button onClick={saveAllQuestions} className="admin-btn-primary">
+                  💾 Save All & Finish
+                </button>
+              </div>
 
-      <h3>Questions Added</h3>
-        {questions.length > 0 && (
-        <button onClick={saveAllQuestions}>
-          Save All Questions
-        </button>
-      )}
-      {questions.map((q, i) => (
-        <div
-          key={i}
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "10px",
-            position: "relative"
-          }}
-        >
-          <button
-            style={{
-              position: "absolute",
-              top: 5,
-              right: 5
-            }}
-            onClick={() => deleteQuestion(i)}
-          >
-            ❌
-          </button>
+              <div className="question-list">
+                {questions.map((q, i) => (
+                  <div key={i} className="question-card">
+                    <button
+                      className="question-delete-btn"
+                      onClick={() => deleteQuestion(i)}
+                      title="Delete Question"
+                    >
+                      ❌
+                    </button>
 
-          <p><b>Q:</b> {q.text}</p>
-          <ul>
-            {q.option.map((o, j) => (
-              <li key={j}>{o}</li>
-            ))}
-          </ul>
-          <p><b>Correct:</b> {q.correctAnswer}</p>
-          <p><b>Points:</b> {q.point}</p>
+                    <p className="question-text">
+                      <span className="question-number">Q{i + 1}:</span> {q.text}
+                    </p>
+                    <ul className="question-options-list">
+                      {q.option.map((o, j) => (
+                        <li key={j} className={o === q.correctAnswer ? 'question-option-correct' : ''}>
+                          {o} {o === q.correctAnswer && "✓"}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="question-points">Points: {q.point}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      ))}
-
-      
+      </div>
     </div>
   );
 }

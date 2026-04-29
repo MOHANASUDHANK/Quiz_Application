@@ -1,10 +1,39 @@
-import { useNavigate } from "react-router-dom"
-export default function(){
+import { useNavigate, Link } from "react-router-dom"
+import Navbar from "../components/Navbar"
+import "../styles/admin.css"
 
-        const navigate = useNavigate();
+export default function AdminDashboard(){
+    const navigate = useNavigate();
 
-        return (<>
-
-        <button/>
-         </>)
+    return (
+        <div className="admin-page-container">
+            <Navbar />
+            <div className="admin-content-wrapper">
+                <div className="admin-card">
+                    <h1 className="admin-title">
+                        Admin Dashboard
+                    </h1>
+                    <p className="admin-subtitle">
+                        Welcome to your control panel. Manage staff accounts and overall quiz content.
+                    </p>
+                    
+                    <div className="admin-button-group">
+                        <button 
+                            onClick={() => navigate('/teacher')}
+                            className="admin-btn-primary"
+                        >
+                            📚 Manage Quizzes & Leaderboards
+                        </button>
+                        
+                        <button 
+                            onClick={() => navigate('/admin/staff')}
+                            className="admin-btn-secondary"
+                        >
+                            👥 Manage Staff
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }

@@ -1,0 +1,73 @@
+@import "components.css";
+
+.admin-page-container {
+  background-color: #FAF8F5;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.admin-content-wrapper {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.admin-card {
+  background-color: #FFFFFF;
+  border: 1px solid #EBE6DF;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  text-align: center;
+}
+
+.admin-title {
+  color: #333333;
+  font-size: 28px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.admin-subtitle {
+  color: #A09890;
+  margin-bottom: 40px;
+}
+
+.admin-button-group {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.admin-btn-primary {
+  background-color: #C1A27A;
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.admin-btn-primary:hover {
+  background-color: #A98C68;
+}
+
+.admin-btn-secondary {
+  background-color: transparent;
+  color: #C1A27A;
+  border: 1px solid #C1A27A;
+  padding: 16px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-btn-secondary:hover {
+  background-color: #FAF8F5;
+}

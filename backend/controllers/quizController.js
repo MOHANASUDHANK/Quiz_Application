@@ -38,3 +38,13 @@ export const addQuiz = async (req, res) => {
         }
 }
 
+export const deleteQuiz = async (req, res) => {
+        try {
+                const { id } = req.params;
+                await Quiz.findByIdAndDelete(id);
+                // Optionally delete all related questions and results
+                res.status(200).json({ message: "Quiz deleted successfully" });
+        } catch (err) {
+                res.status(500).json({ message: "Error while deleting quiz", error: err.message });
+        }
+}

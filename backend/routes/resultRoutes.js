@@ -5,9 +5,9 @@ import {protect} from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.post("/:id/attempt",protect,attemptQuiz);
-router.get("/:id",getResultById);
-router.get("/quiz/:id",getResultByQuizId);
-router.get("/user/:id",getResultByUserId);
-router.post("/",submitResult);
+router.get("/:id",protect,getResultById);
+router.get("/quiz/:id",protect,getResultByQuizId);
+router.get("/user/:id",protect,getResultByUserId);
+router.post("/",protect,submitResult);
 
 export default router;

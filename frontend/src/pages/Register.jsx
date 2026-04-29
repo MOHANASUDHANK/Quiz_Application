@@ -1,66 +1,70 @@
 import {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 import api from "../api/api"
+import "../styles/auth.css"
 
 export default function Register(){
+    const [form,setForm] = useState({
+            userName : "",
+            email : "",
+            password : ""
+    })
+    const Navigate = useNavigate();
 
-        const [form,setForm] = useState({
-                userName : "",
-                email : "",
-                password : ""
-        })
-        const Navigate = useNavigate();
+    function handleChange(e){
+            setForm({...form,[e.target.name] : e.target.value})
+    }
 
-        function handleChange(e){
-                setForm({...form,[e.target.name] : e.target.value})
-        }
-
-        async function handleSubmit(e){
-                try {
-                        e.preventDefault();
-                console.log(form)
-                
+    async function handleSubmit(e){
+            try {
+                e.preventDefault();
                 const res = await api.post(`/auth/register`,form);
-                console.log(res);
                 Navigate(`/login`)
-                } catch (err) {
-                        console.log(err)
-                }
-                
-        }
+            } catch (err) {
+                console.log(err)
+            }
+    }
 
-        return (
-        <div>
-                <form>
-                        <input
-                        type = "text"
-                        placeholder = "USERNAME"
-                        name = "userName"
-                        value = {form.userName}
-                        onChange = {handleChange}
+    return (
+        <div className="auth-container">
+            <div className="auth-card">
+                <h2 className="auth-title">Create Account</h2>
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    <input
+                        className="auth-input"
+                        type="text"
+                        placeholder="Username"
+                        name="userName"
+                        value={form.userName}
+                        onChange={handleChange}
                         required
-                        />
-                        <input
-                        type = "email"
-                        placeholder = "EMAIL:"
-                        name = "email"
-                        value = {form.email}
-                        onChange = {handleChange}
+                    />
+                    <input
+                        className="auth-input"
+                        type="email"
+                        placeholder="Email Address"
+                        name="email"
+                        value={form.email}
+                        onChange={handleChange}
                         required
-                        />
-                        <input
-                        type = "password"
-                        placeholder = "PASSWORD"
-                        name = "password"
-                        value = {form.password}
-                        onChange = {handleChange}
+                    />
+                    <input
+                        className="auth-input"
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        value={form.password}
+                        onChange={handleChange}
                         required
-                        />
-                        <button
-                                onClick = {handleSubmit}
-                        >Submit</button>
+                    />
+                    <button className="auth-button" type="submit">
+                        Sign Up
+                    </button>
                 </form>
-               
+                <Link to="/login" className="auth-link">
+                    Already have an account? Log in
+                </Link>
+            </div>
         </div>
-        )
+    )
 }

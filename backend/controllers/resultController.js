@@ -28,7 +28,9 @@ export const getResultById = async (req, res) => {
 export const getResultByQuizId = async (req, res) => {
         try {
                 const { id } = req.params;
-                const data = await Result.find({ quizId: id });
+                const data = await Result.find({ quizId: id })
+                        .populate("userId", "userName email")
+                        .sort({ score: -1 });
                 console.log(data);
                 res.status(200).json(data);
         } catch (err) {

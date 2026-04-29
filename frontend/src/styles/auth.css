@@ -1,0 +1,86 @@
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FAF8F5;
+  /* Light sand/beige */
+  font-family: 'Inter', -apple-system, sans-serif;
+  padding: 20px;
+}
+
+.auth-card {
+  background-color: #FFFFFF;
+  border: 1px solid #EBE6DF;
+  padding: 40px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  text-align: center;
+}
+
+.auth-title {
+  color: #333333;
+  font-size: 26px;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 6px;
+  border: 1px solid #DCD5CD;
+  background-color: #FFFFFF;
+  color: #333333;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.auth-input::placeholder {
+  color: #A09890;
+}
+
+.auth-input:focus {
+  border-color: #C1A27A;
+  /* Sandal focus */
+}
+
+.auth-button {
+  background-color: #C1A27A;
+  /* Sandal button */
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.auth-button:hover {
+  background-color: #A98C68;
+}
+
+.auth-link {
+  color: #A98C68;
+  font-size: 14px;
+  margin-top: 25px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
