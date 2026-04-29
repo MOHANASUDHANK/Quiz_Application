@@ -15,19 +15,25 @@ export default function QuizAttempt() {
     const [isStarted, setIsStarted] = useState(false);
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
-    useEffect(() => {
-        console.log(id);
-        api.get(`/question/${id}`).then((r) => {
-            setQuestions(r.data);
-            setAnswers(new Array(r.data.length).fill(null));
-        });
+    const [loading, setLoading] = useState(true);
 
-        // Fetch quiz details for time limit
-        api.get(`/quiz/${id}`).then((r) => {
-            setQuizTitle(r.data.title);
-            if (r.data.timeLimit && r.data.timeLimit > 0) {
-                setTimeLeft(r.data.timeLimit * 60); // convert minutes to seconds
+    useEffect(() => {
+        setLoading(true);
+        Promise.all([
+            api.get(`/question/${id}`),
+            api.get(`/quiz/${id}`)
+        ]).then(([questionsRes, quizRes]) => {
+            setQuestions(questionsRes.data);
+            setAnswers(new Array(questionsRes.data.length).fill(null));
+            
+            setQuizTitle(quizRes.data.title);
+            if (quizRes.data.timeLimit && quizRes.data.timeLimit > 0) {
+                setTimeLeft(quizRes.data.timeLimit * 60);
             }
+            setLoading(false);
+        }).catch(err => {
+            console.error(err);
+            setLoading(false);
         });
     }, [id]);
 
@@ -115,20 +121,26 @@ export default function QuizAttempt() {
             <div className="admin-content-wrapper">
                 {!isStarted ? (
                     <div className="admin-card text-center relative-container" style={{ maxWidth: '600px', margin: '40px auto' }}>
-                        <h1 className="admin-title mb-20">{quizTitle || "Ready to begin?"}</h1>
-                        <div style={{ backgroundColor: '#fff3cd', padding: '20px', borderRadius: '8px', border: '1px solid #ffeeba', color: '#856404', marginBottom: '30px' }}>
-                            <p style={{ margin: '0 0 10px 0', fontWeight: 'bold' }}>⚠️ Important Security Rules</p>
-                            <p style={{ margin: 0, fontSize: '15px' }}>
-                                This quiz requires <strong>Full Screen mode</strong>. If you exit full screen or switch tabs at any point while taking the quiz, your current answers will be <strong>automatically submitted instantly</strong>.
-                            </p>
-                        </div>
-                        <button 
-                            onClick={handleStartQuiz} 
-                            className="admin-btn-primary"
-                            style={{ padding: '15px 40px', fontSize: '18px' }}
-                        >
-                            Start Quiz
-                        </button>
+                        {loading ? (
+                            <h1 className="admin-title mb-20">Loading quiz details...</h1>
+                        ) : (
+                            <>
+                                <h1 className="admin-title mb-20">{quizTitle || "Ready to begin?"}</h1>
+                                <div style={{ backgroundColor: '#fff3cd', padding: '20px', borderRadius: '8px', border: '1px solid #ffeeba', color: '#856404', marginBottom: '30px' }}>
+                                    <p style={{ margin: '0 0 10px 0', fontWeight: 'bold' }}>Important Security Rules</p>
+                                    <p style={{ margin: 0, fontSize: '15px' }}>
+                                        This quiz requires <strong>Full Screen mode</strong>. If you exit full screen or switch tabs at any point while taking the quiz, your current answers will be <strong>automatically submitted instantly</strong>.
+                                    </p>
+                                </div>
+                                <button 
+                                    onClick={handleStartQuiz} 
+                                    className="admin-btn-primary"
+                                    style={{ padding: '15px 40px', fontSize: '18px' }}
+                                >
+                                    Start Quiz
+                                </button>
+                            </>
+                        )}
                     </div>
                 ) : (
                     <div className="admin-card text-left relative-container">
@@ -136,7 +148,7 @@ export default function QuizAttempt() {
                         <h1 className="admin-title m-0">{quizTitle || "Quiz Attempt"}</h1>
                         {timeLeft !== null && (
                             <div className={`quiz-timer ${timeLeft < 60 ? 'timer-warning' : ''}`}>
-                                ⏱️ {formatTime(timeLeft)}
+                                {formatTime(timeLeft)}
                             </div>
                         )}
                     </div>

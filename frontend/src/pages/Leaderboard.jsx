@@ -9,10 +9,12 @@ export default function Leaderboard() {
     const navigate = useNavigate();
     const [results, setResults] = useState([]);
     const [quiz, setQuiz] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const token = localStorage.getItem("token");
 
     useEffect(() => {
+        setLoading(true);
         // Fetch quiz details
         api.get(`/quiz/${id}`).then(res => setQuiz(res.data)).catch(console.error);
 
@@ -20,8 +22,14 @@ export default function Leaderboard() {
         api.get(`/result/quiz/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
-        .then(res => setResults(res.data))
-        .catch(console.error);
+        .then(res => {
+            setResults(res.data);
+            setLoading(false);
+        })
+        .catch(err => {
+            console.error(err);
+            setLoading(false);
+        });
     }, [id, token]);
 
     return (
@@ -33,7 +41,7 @@ export default function Leaderboard() {
                         onClick={() => navigate(-1)} 
                         className="btn-back"
                     >
-                        ← Back
+                        Back
                     </button>
                     
                     <h1 className="admin-title text-center">
@@ -75,7 +83,12 @@ export default function Leaderboard() {
                         </tbody>
                     </table>
                     
-                    {results.length === 0 && (
+                    {loading && (
+                        <p className="quiz-list-empty mt-40">
+                            Loading results...
+                        </p>
+                    )}
+                    {!loading && results.length === 0 && (
                         <p className="quiz-list-empty mt-40">
                             No attempts yet for this quiz.
                         </p>

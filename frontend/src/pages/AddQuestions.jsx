@@ -113,7 +113,7 @@ export default function AddQuestions() {
             </div>
 
             <button onClick={addQuestionToList} className="admin-btn-secondary">
-              ➕ Add to List
+              Add to List
             </button>
           </div>
 
@@ -122,7 +122,7 @@ export default function AddQuestions() {
               <div className="quiz-list-header">
                 <h3>Questions Added ({questions.length})</h3>
                 <button onClick={saveAllQuestions} className="admin-btn-primary">
-                  💾 Save All & Finish
+                  Save & Finish
                 </button>
               </div>
 
@@ -134,7 +134,7 @@ export default function AddQuestions() {
                       onClick={() => deleteQuestion(i)}
                       title="Delete Question"
                     >
-                      ❌
+                      Delete
                     </button>
 
                     <p className="question-text">
@@ -143,7 +143,7 @@ export default function AddQuestions() {
                     <ul className="question-options-list">
                       {q.option.map((o, j) => (
                         <li key={j} className={o === q.correctAnswer ? 'question-option-correct' : ''}>
-                          {o} {o === q.correctAnswer && "✓"}
+                          {o} {o === q.correctAnswer && "(Correct)"}
                         </li>
                       ))}
                     </ul>

@@ -14,12 +14,21 @@ export default function StaffManagement() {
     
     const token = localStorage.getItem("token");
 
+    const [loading, setLoading] = useState(true);
+
     const fetchStaff = () => {
+        setLoading(true);
         api.get("/user/staff", {
             headers: { Authorization: `Bearer ${token}` }
         })
-        .then(res => setStaff(res.data))
-        .catch(console.error);
+        .then(res => {
+            setStaff(res.data);
+            setLoading(false);
+        })
+        .catch(err => {
+            console.error(err);
+            setLoading(false);
+        });
     };
 
     useEffect(() => {
@@ -64,7 +73,7 @@ export default function StaffManagement() {
             <div className="admin-content-wrapper">
                 <div className="admin-card text-left">
                     <h1 className="admin-title text-center">
-                        Staff Management
+                        Team Management
                     </h1>
                     
                     <div className="mb-30 staff-form-wrapper">
@@ -112,7 +121,8 @@ export default function StaffManagement() {
                                     </button>
                                 </div>
                             ))}
-                            {staff.length === 0 && <p className="quiz-list-empty">No staff found.</p>}
+                            {loading && <p className="quiz-list-empty">Loading...</p>}
+                            {!loading && staff.length === 0 && <p className="quiz-list-empty">No staff found.</p>}
                         </div>
                     </div>
                 </div>

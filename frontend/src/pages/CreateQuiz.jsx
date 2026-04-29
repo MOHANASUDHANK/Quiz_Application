@@ -105,7 +105,7 @@ export default function CreateQuiz() {
                                             onClick={() => removeCategory(i)}
                                             className="category-tag-remove"
                                         >
-                                            ❌
+                                            Remove
                                         </button>
                                     </div>
                                 ))}
@@ -148,7 +148,7 @@ export default function CreateQuiz() {
                             onClick={handleSubmit}
                             className="admin-btn-primary mt-20"
                         >
-                            Next &rarr; Add Questions
+                            Continue to Questions
                         </button>
                     </form>
                 </div>

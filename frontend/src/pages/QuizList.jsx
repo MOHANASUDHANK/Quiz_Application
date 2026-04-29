@@ -7,10 +7,20 @@ import "../styles/admin.css"
 export default function QuizList() {
 
         const [quizzes, setQuizzes] = useState([]);
+        const [loading, setLoading] = useState(true);
         const navigate = useNavigate();
 
         useEffect(() => {
-                api.get("/quiz").then(res => setQuizzes(res.data));
+                setLoading(true);
+                api.get("/quiz")
+                   .then(res => {
+                       setQuizzes(res.data);
+                       setLoading(false);
+                   })
+                   .catch(err => {
+                       console.error(err);
+                       setLoading(false);
+                   });
         }, []);
 
         const token = localStorage.getItem("token");
@@ -37,7 +47,8 @@ export default function QuizList() {
                                                                 </button>
                                                         </div>
                                                 ))}
-                                                {quizzes.length === 0 && <p className="quiz-list-empty">No quizzes available right now.</p>}
+                                                {loading && <p className="quiz-list-empty">Loading quizzes...</p>}
+                                                {!loading && quizzes.length === 0 && <p className="quiz-list-empty">No quizzes available right now.</p>}
                                         </div>
                                 </div>
                         </div>

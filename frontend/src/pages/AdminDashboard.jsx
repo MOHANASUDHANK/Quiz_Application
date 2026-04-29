@@ -22,14 +22,14 @@ export default function AdminDashboard(){
                             onClick={() => navigate('/teacher')}
                             className="admin-btn-primary"
                         >
-                            📚 Manage Quizzes & Leaderboards
+                            Manage Quizzes & Leaderboards
                         </button>
                         
                         <button 
                             onClick={() => navigate('/admin/staff')}
                             className="admin-btn-secondary"
                         >
-                            👥 Manage Staff
+                            Manage Your Team
                         </button>
                     </div>
                 </div>

@@ -8,8 +8,16 @@ export default function TeacherDashboard() {
     const navigate = useNavigate();
     const [quizzes, setQuizzes] = useState([]);
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        api.get("/quiz").then(res => setQuizzes(res.data)).catch(console.error);
+        api.get("/quiz").then(res => {
+            setQuizzes(res.data);
+            setLoading(false);
+        }).catch(err => {
+            console.error(err);
+            setLoading(false);
+        });
     }, []);
 
     const token = localStorage.getItem("token");
@@ -35,7 +43,7 @@ export default function TeacherDashboard() {
             <div className="admin-content-wrapper">
                 <div className="admin-card text-left">
                     <h1 className="admin-title text-center">
-                        Teacher Dashboard
+                        Your Quizzes
                     </h1>
                     
                     <div className="quiz-list-header">
@@ -44,7 +52,7 @@ export default function TeacherDashboard() {
                             onClick={() => navigate('/create')}
                             className="admin-btn-primary"
                         >
-                            ➕ Create New Quiz
+                            Create a Quiz
                         </button>
                     </div>
 
@@ -60,20 +68,21 @@ export default function TeacherDashboard() {
                                         onClick={() => navigate(`/teacher/leaderboard/${q._id}`)}
                                         className="admin-btn-secondary"
                                     >
-                                        🏆 Leaderboard
+                                        View Leaderboard
                                     </button>
                                     {isAdmin && (
                                         <button 
                                             onClick={() => handleDelete(q._id)}
                                             className="btn-danger"
                                         >
-                                            🗑️ Delete
+                                            Delete
                                         </button>
                                     )}
                                 </div>
                             </div>
                         ))}
-                        {quizzes.length === 0 && <p className="quiz-list-empty">No quizzes found.</p>}
+                        {loading && <p className="quiz-list-empty">Loading your quizzes...</p>}
+                        {!loading && quizzes.length === 0 && <p className="quiz-list-empty">No quizzes found. Start by creating one!</p>}
                     </div>
                 </div>
             </div>
